@@ -30,16 +30,12 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
         String tokenHeader = request.getHeader(Constants.HEADER_AUTHORIZATION_KEY);
         //System.out.println(tokenHeader);
         if(tokenHeader != null && tokenHeader.startsWith("Bearer ")){
-//            System.out.println("OK");
             String token = tokenHeader.substring(7);
-//            System.out.println(token);
 
             if(jwtUtils.isJWTValid(token)){
-//                System.out.println("VALID");
                 String username="";
                 try {
                     username = jwtUtils.getUserNameFromToken(token);
-                    //System.out.println(username);
                 }catch (Exception e){
                     throw new RuntimeException();
                 }

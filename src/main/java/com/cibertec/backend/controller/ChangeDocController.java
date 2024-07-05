@@ -91,7 +91,7 @@ public class ChangeDocController {
     public ResponseEntity<?> actualizarEstadoClienteEsperaLlegadaNuevoEquipo(@RequestBody ChangeDocDTO changeDocDTO){
 
         try {
-            return new ResponseEntity<>(changeDocService.actualizarEstadoClienteEsperaLlegadaNuevoEquipo(changeDocDTO.getImei()), HttpStatus.OK);
+            return new ResponseEntity<>(changeDocService.actualizarEstadoClienteEsperaLlegadaNuevoEquipo(changeDocDTO.getImei(), changeDocDTO.getComment()), HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -100,10 +100,14 @@ public class ChangeDocController {
 
 
 
-    @PreAuthorize("hasRole('SALE')")
-    @GetMapping("doc-cambio-tikcet-imei")
+    @PreAuthorize("hasRole('TECH')")
+    @GetMapping("/doc-cambio-tikcet-imei")
     public ResponseEntity<?> obtenerDocCambioDeTicketPorIemi(@RequestParam String imei){
-        return new ResponseEntity<>(changeDocService.obtenerDocCambioDeTicketPorImei(imei),HttpStatus.NOT_FOUND);
+        try {
+            return new ResponseEntity<>(changeDocService.obtenerDocCambioDeTicketPorImei(imei),HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
 }
 
 

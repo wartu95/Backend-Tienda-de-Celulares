@@ -312,7 +312,7 @@ public class ChangeDocServiceImpl implements IChangeDocService {
 
     @Override
     @Transactional
-    public int actualizarEstadoClienteEsperaLlegadaNuevoEquipo(String imei) {
+    public int actualizarEstadoClienteEsperaLlegadaNuevoEquipo(String imei, String comment) {
 
         try {
             //buscar por imei, esto debe retornar la solicitud de cambio
@@ -320,6 +320,7 @@ public class ChangeDocServiceImpl implements IChangeDocService {
             if(changeDoc.getStateChangeDoc().getState().equals(EStateChangeDoc.APROBADO)){
                 changeDoc.setStateChangeDoc(stateChangeDocRepository.findByState(EStateChangeDoc.ESPERA).get());
                 changeDoc.setDateLastState(Timestamp.valueOf(LocalDateTime.now()));
+                changeDoc.setComment(comment);
                 changeDocRepository.save(changeDoc);
                 return 0;
             }else {

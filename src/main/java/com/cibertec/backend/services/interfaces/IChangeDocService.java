@@ -13,7 +13,8 @@ public interface IChangeDocService {
     public int registrarCambio(String oldImei,String newImei);
     public int actualizarEstadoTecnicoRechazado(String imei, String comment);
 
-    public int actualizarEstadoClienteEsperaLlegadaNuevoEquipo(String imei);
+    public int actualizarEstadoClienteEsperaLlegadaNuevoEquipo(String imei, String comment);
     ChangeDocRDTO obtenerDocCambioDeTicketPorImei(String imei);
+
 
 }

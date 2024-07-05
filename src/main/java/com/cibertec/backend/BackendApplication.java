@@ -87,7 +87,7 @@ public class BackendApplication {
 								.build()).collect(Collectors.toSet());
 				UserAppWeb userToaEntity=UserAppWeb.builder()
 						.name(sale)
-						.password(passwordEncoder.encode("contrasenia123segura"))
+						.password(passwordEncoder.encode("1234"))
 						.roles(roleEntitySet).
 						build();
 				iUserAppWebRepository.save(userToaEntity);
@@ -107,7 +107,7 @@ public class BackendApplication {
 
 				UserAppWeb userToaEntity2=UserAppWeb.builder()
 						.name(tech)
-						.password(passwordEncoder.encode("contrasenia123segura"))
+						.password(passwordEncoder.encode("1234"))
 						.roles(roleEntitySet2).
 						build();
 
