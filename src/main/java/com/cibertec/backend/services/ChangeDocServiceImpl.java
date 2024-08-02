@@ -256,10 +256,12 @@ public class ChangeDocServiceImpl implements IChangeDocService {
 
                 ChangeDoc changeDoc= ticketRepository.findByProductImei(oldImei).get().getChangeDoc();
 
-                if(changeDoc.getStateChangeDoc().getState().equals(EStateChangeDoc.APROBADO)){
+                if(changeDoc.getStateChangeDoc().getState().equals(EStateChangeDoc.APROBADO) || changeDoc.getStateChangeDoc().getState().equals(EStateChangeDoc.ESPERA) ){
                     changeDoc.setProduct(productRepository.findById(newImei).get());//imei entregado
                     changeDoc.setDateLastState(Timestamp.valueOf(LocalDateTime.now()));
                     changeDoc.setStateChangeDoc(stateChangeDocRepository.findByState(EStateChangeDoc.EJECUTADO).get());
+                    changeDoc.setComment(" -o" +
+                            "");
                     changeDocRepository.save(changeDoc);
 
                     Product product=productRepository.findById(newImei).get();
